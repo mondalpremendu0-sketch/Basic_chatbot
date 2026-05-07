@@ -9,7 +9,7 @@ const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
     // Allow both 5173 (Vite) and standard React (3000) or strict wildcard
-    origin: ["http://localhost:5173", "http://localhost:3000"], 
+    origin: ["https://basic-chatbot-theta.vercel.app", "https://basic-chatbot-theta.vercel.app/"], 
     methods: ['GET', 'POST']
   }
 });

@@ -11,7 +11,7 @@ const ChatApp = () => {
 
   useEffect(() => {
     // 1. Initialize connection
-    socketRef.current = io("http://localhost:3000");
+    socketRef.current = io("https://basic-chatbot-yayu.vercel.app/");
 
     // 2. Setup listeners
     socketRef.current.on("connect", () => {
