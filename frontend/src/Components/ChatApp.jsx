@@ -11,7 +11,7 @@ const ChatApp = () => {
 
   useEffect(() => {
 
-  socketRef.current = io("https://your-backend.onrender.com", {
+  socketRef.current = io("https://basic-chatbot-suta.onrender.com", {
     transports: ["websocket"],
   });
 
