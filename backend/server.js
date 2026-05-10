@@ -8,10 +8,8 @@ const httpServer = createServer(app);
 
 const io = new Server(httpServer, {
   cors: {
-    origin: [
-      "https://basic-chatbot-theta.vercel.app",
-      "http://localhost:5173"
-    ],
+    origin: 
+      "https://basic-chatbot-theta.vercel.app/",
     methods: ["GET", "POST"],
     credentials: true
   }
