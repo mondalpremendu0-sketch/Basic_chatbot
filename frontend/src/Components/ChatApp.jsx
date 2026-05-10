@@ -10,33 +10,34 @@ const ChatApp = () => {
   const socketRef = useRef(null);
 
   useEffect(() => {
-    // 1. Initialize connection
-    socketRef.current = io("https://basic-chatbot-yayu.vercel.app");
 
-    // 2. Setup listeners
-    socketRef.current.on("connect", () => {
-      console.log("Connected to backend with ID:", socketRef.current.id);
-    });
+  socketRef.current = io("https://your-backend.onrender.com", {
+    transports: ["websocket"],
+  });
 
-    socketRef.current.on("connect_error", (err) => {
-      console.error("Connection Error:", err.message);
-    });
+  socketRef.current.on("connect", () => {
+    console.log("Connected:", socketRef.current.id);
+  });
 
-    socketRef.current.on("response", (aiResponse) => {
-      const aiMessage = { 
-        id: Date.now(), 
-        text: aiResponse, 
-        sender: "ai" 
-        
-      };
-      setMessages((prev) => [...prev, aiMessage]);
-    });
+  socketRef.current.on("connect_error", (err) => {
+    console.error("Connection Error:", err.message);
+  });
 
-    // 3. Cleanup on unmount (prevents double connections in React Strict Mode)
-    return () => {
-      socketRef.current.disconnect();
+  socketRef.current.on("response", (aiResponse) => {
+    const aiMessage = {
+      id: Date.now(),
+      text: aiResponse,
+      sender: "ai"
     };
-  }, []);
+
+    setMessages((prev) => [...prev, aiMessage]);
+  });
+
+  return () => {
+    socketRef.current.disconnect();
+  };
+
+}, []);
 
   const handleSendMessage = () => {
     if (inputValue.trim() === "") return;

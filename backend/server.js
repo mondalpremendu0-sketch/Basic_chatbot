@@ -8,9 +8,12 @@ const httpServer = createServer(app);
 
 const io = new Server(httpServer, {
   cors: {
-    // Allow both 5173 (Vite) and standard React (3000) or strict wildcard
-    origin: ["https://basic-chatbot-theta.vercel.app", "https://basic-chatbot-theta.vercel.app/"], 
-    methods: ['GET', 'POST']
+    origin: [
+      "https://basic-chatbot-theta.vercel.app",
+      "http://localhost:5173"
+    ],
+    methods: ["GET", "POST"],
+    credentials: true
   }
 });
 
@@ -34,5 +37,5 @@ io.on("connection", (socket) => {
 });
 
 httpServer.listen(3000, () => {
-  console.log("Server running at http://127.0.0.1:3000/");
+  console.log("Server running at http://localhost:3000");
 });
